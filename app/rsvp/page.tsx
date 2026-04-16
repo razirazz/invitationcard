@@ -17,6 +17,8 @@ export default function RSVP() {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
 
+    const [error, setError] = useState("");
+
     const next = () => setStep((s) => s + 1);
     const back = () => setStep((s) => s - 1);
 
@@ -55,7 +57,7 @@ export default function RSVP() {
                                     setAttending(true);
                                     next();
                                 }}
-                                className="px-6 py-2 glass rounded-xl"
+                                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition"
                             >
                                 {lang === "en" ? "Yes" : "അതെ"}
                             </button>
@@ -65,7 +67,7 @@ export default function RSVP() {
                                     setAttending(false);
                                     next();
                                 }}
-                                className="px-6 py-2 glass rounded-xl"
+                                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition"
                             >
                                 {lang === "en" ? "No" : "ഇല്ല"}
                             </button>
@@ -91,8 +93,8 @@ export default function RSVP() {
                         />
 
                         <div className="flex justify-between">
-                            <button onClick={back}>Back</button>
-                            <button onClick={next}>Continue</button>
+                            <button onClick={back} className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition">Back</button>
+                            <button onClick={next} className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition">Continue</button>
                         </div>
                     </>
                 )}
@@ -108,10 +110,10 @@ export default function RSVP() {
 
                         <input
                             type="text"
-                            placeholder={lang === "en" ? "Name" : "പേര്"}
+                            placeholder={lang === "en" ? "Your Name" : "നിങ്ങളുടെ പേര്"}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full p-2 rounded-lg text-black"
+                            className="w-full p-3 rounded-xl bg-white/80 text-black outline-none"
                         />
 
                         <input
@@ -119,39 +121,69 @@ export default function RSVP() {
                             placeholder="WhatsApp Number"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
-                            className="w-full p-2 rounded-lg text-black"
+                            className="w-full p-3 rounded-xl bg-white/80 text-black outline-none"
                         />
 
+                        {error && (
+                            <p className="text-red-500 text-sm">{error}</p>
+                        )}
+
                         <div className="flex justify-between">
-                            <button onClick={back}>Back</button>
+                            <button onClick={back} className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition">Back</button>
                             <button
                                 onClick={async () => {
-                                    if (!name || !phone) {
-                                        alert("Please fill all fields");
+                                    // Reset error
+                                    setError("");
+
+                                    // Validation
+                                    if (!name.trim()) {
+                                        setError(lang === "en" ? "Name is required" : "പേര് ആവശ്യമാണ്");
                                         return;
                                     }
 
-                                    const res = await fetch("/api/rsvp", {
-                                        method: "POST",
-                                        headers: {
-                                            "Content-Type": "application/json",
-                                        },
-                                        body: JSON.stringify({
-                                            name,
-                                            phone,
-                                            attending,
-                                            guests,
-                                        }),
-                                    });
+                                    if (!/^[0-9]{10}$/.test(phone)) {
+                                        setError(
+                                            lang === "en"
+                                                ? "Enter valid 10-digit phone number"
+                                                : "ശരിയായ ഫോൺ നമ്പർ നൽകുക"
+                                        );
+                                        return;
+                                    }
 
-                                    const data = await res.json();
+                                    try {
+                                        const res = await fetch("/api/rsvp", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                            body: JSON.stringify({
+                                                name,
+                                                phone,
+                                                attending,
+                                                guests,
+                                            }),
+                                        });
 
-                                    if (data.success) {
-                                        next();
-                                    } else {
-                                        alert("Error saving response");
+                                        const data = await res.json();
+
+                                        if (data.success) {
+                                            next();
+                                        } else {
+                                            if (data.error === "Phone already exists") {
+                                                setError(
+                                                    lang === "en"
+                                                        ? "This number is already registered"
+                                                        : "ഈ നമ്പർ ഇതിനകം രജിസ്റ്റർ ചെയ്തിട്ടുണ്ട്"
+                                                );
+                                            } else {
+                                                setError("Something went wrong");
+                                            }
+                                        }
+                                    } catch (err) {
+                                        setError("Server error");
                                     }
                                 }}
+                                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition"
                             >
                                 Submit
                             </button>

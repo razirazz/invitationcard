@@ -1,52 +1,40 @@
 // // import { supabase } from "../../lib/supabase";
-// import { supabase } from "@/lib/supabase";
-// import { NextResponse } from "next/server";
-
-// export async function POST(req: Request) {
-//   const body = await req.json();
-
-//   const { name, phone, attending, guests } = body;
-
-//   const { error } = await supabase.from("rsvp").insert([
-//     {
-//       name,
-//       phone,
-//       attending,
-//       guests,
-//     },
-//   ]);
-
-//   if (error) {
-//     return NextResponse.json({ error: error.message }, { status: 500 });
-//   }
-
-//   return NextResponse.json({ success: true });
-// }
-
-
 import { supabase } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log("Incoming data:", body);
-
     const { name, phone, attending, guests } = body;
 
-    const { error } = await supabase.from("rsvp").insert([
-      { name, phone, attending, guests },
-    ]);
+    const { data, error } = await supabase
+      .from("rsvp")
+      .insert([{ name, phone, attending, guests }])
+      .select(); // 👈 IMPORTANT
 
     if (error) {
-      console.error("Supabase error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      if (error.code === "23505") {
+        return NextResponse.json(
+          { success: false, error: "Phone already exists" },
+          { status: 400 }
+        );
+      }
+
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({
+      success: true,
+      data,
+    });
 
   } catch (err) {
-    console.error("Server error:", err);
-    return NextResponse.json({ error: "Server crashed" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Server crashed" },
+      { status: 500 }
+    );
   }
 }

@@ -1,10 +1,13 @@
 "use client";
 
+import { useUI } from "@/lib/ui-context";
 import { useEffect, useState } from "react";
-import { useUI } from "../lib/ui-context";
 
 export default function Countdown() {
   const { lang } = useUI();
+
+  const [mounted, setMounted] = useState(false);
+  const [time, setTime] = useState<any>(null);
 
   const target = new Date("2026-06-13T11:00:00").getTime();
 
@@ -22,9 +25,9 @@ export default function Countdown() {
     };
   };
 
-  const [time, setTime] = useState<any>(calculate());
-
   useEffect(() => {
+    setMounted(true); // 👈 important
+
     const interval = setInterval(() => {
       setTime(calculate());
     }, 1000);
@@ -32,9 +35,12 @@ export default function Countdown() {
     return () => clearInterval(interval);
   }, []);
 
+  // 👇 Prevent SSR mismatch
+  if (!mounted) return null;
+
   if (!time) {
     return (
-      <p className="text-xl font-semibold">
+      <p>
         {lang === "en" ? "Event Started 🎉" : "പരിപാടി ആരംഭിച്ചു 🎉"}
       </p>
     );
@@ -48,11 +54,13 @@ export default function Countdown() {
   const values = Object.values(time);
 
   return (
-    <div className="glass p-6 flex gap-6 text-center">
-      {values.map((val, i) => (
+    <div className="glass p-6 flex gap-4 text-center">
+      {values.map((d, i) => (
         <div key={i}>
-          <p className="text-2xl font-bold">{val}</p>
-          <p className="text-xs uppercase opacity-70">{labels[i]}</p>
+          <p className="text-2xl font-bold">{d}</p>
+          <p className="text-xs uppercase opacity-70">
+            {labels[i]}
+          </p>
         </div>
       ))}
     </div>

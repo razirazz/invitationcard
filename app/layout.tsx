@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { UIProvider } from "@/lib/ui-context";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import { Noto_Sans_Malayalam, Poppins } from "next/font/google";
+
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const malayalam = Noto_Sans_Malayalam({
+  subsets: ["malayalam"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${poppins.className} ${malayalam.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <UIProvider >{children}</UIProvider></body>

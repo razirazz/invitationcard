@@ -10,7 +10,7 @@ export default function LangToggle() {
       onClick={() => setLang(lang === "en" ? "ml" : "en")}
       className="glass px-4 py-2 rounded-xl"
     >
-      {lang === "en" ? "മലയാളം" : "English"}
+      {lang === "en" ? "മല" : "en"}
     </button>
   );
 }
