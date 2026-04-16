@@ -1,11 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useUI } from "@/lib/ui-context";
 
 export default function RSVP() {
     const { lang } = useUI();
+
+    const router = useRouter();
 
     const [step, setStep] = useState(1);
     const [attending, setAttending] = useState<boolean | null>(null);
@@ -15,6 +19,16 @@ export default function RSVP() {
 
     const next = () => setStep((s) => s + 1);
     const back = () => setStep((s) => s - 1);
+
+    useEffect(() => {
+        if ((attending === false && step === 2) || (attending && step === 4)) {
+            const timer = setTimeout(() => {
+                router.push("/");
+            }, 2500); // 10 seconds
+
+            return () => clearTimeout(timer);
+        }
+    }, [attending, step, router]);
 
     return (
         <main className="min-h-screen flex items-center justify-center p-6">
@@ -154,14 +168,14 @@ export default function RSVP() {
                                     ? "Thank you! 🎉"
                                     : "നന്ദി! 🎉"
                                 : lang === "en"
-                                    ? "Thank you for your response"
-                                    : "നിങ്ങളുടെ മറുപടിക്ക് നന്ദി"}
+                                    ? "You will be redirected to home shortly..."
+                                    : "താങ്കൾ ഉടൻ ഹോം പേജിലേക്ക് മടങ്ങും..."}
                         </h2>
 
                         <p>
                             {lang === "en"
-                                ? "We look forward to seeing you."
-                                : "നിങ്ങളെ കാണാൻ ആകാംക്ഷയോടെ കാത്തിരിക്കുന്നു"}
+                                ? "Thank you for your response"
+                                : "നിങ്ങളുടെ മറുപടിക്ക് നന്ദി"}
                         </p>
                     </>
                 )}
