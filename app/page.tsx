@@ -21,6 +21,20 @@ export default function Home() {
         <ThemeToggle />
       </div>
 
+      <p
+        className={`
+          text-sm md:text-base 
+          tracking-wide 
+          italic  
+          text-center
+          
+        `}
+      >
+        {lang === "en"
+          ? "In the name of Allah, the Most Gracious, the Most Merciful"
+          : "അല്ലാഹുവിന്റെ നാമത്തിൽ, ഏറ്റവും കരുണാനിധിയും അത്യന്തം ദയാവാനുമായ"}
+      </p>
+
 
       {/* TWO COLUMN LAYOUT */}
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -32,8 +46,8 @@ export default function Home() {
 
           <h1
             className={`font-bold text-wrap gold ${lang === "ml"
-                ? "text-3xl leading-relaxed tracking-wide"
-                : "text-4xl"
+              ? "text-3xl leading-relaxed tracking-wide"
+              : "text-4xl"
               }`}
           >
             {t.title}
@@ -74,8 +88,8 @@ export default function Home() {
           {/* Details */}
           <div className="space-y-1">
             <b><p className="text-[18px]">{t.date}</p>
-            <p>{t.time}</p>
-            <p>{t.venue}</p></b>
+              <p>{t.time}</p>
+              <p>{t.venue}</p></b>
           </div>
 
           {/* Countdown */}
@@ -93,7 +107,7 @@ export default function Home() {
           <Link href="/rsvp">
             <button className="mt-4 px-6 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition">
               {lang === "en"
-                ? "For Customized Invitation Card, Click Here" 
+                ? "For Customized Invitation Card, Click Here"
                 : "കസ്ടമൈസ്ട് ക്ഷണകത്തിനായി, ഇവിടെ ക്ലിക്ക് ചെയ്യുക"}
             </button>
           </Link>
