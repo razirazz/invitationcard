@@ -57,9 +57,9 @@ export default function RSVP() {
                                     setAttending(true);
                                     next();
                                 }}
-                                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition"
+                                className="mt-4 px-6 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition"
                             >
-                                {lang === "en" ? "Yes" : "അതെ"}
+                                {lang === "en" ? "Yes! Insha Allah" : "അതെ, ഇന്ഷാഅല്ലാഹ്"}
                             </button>
 
                             <button
@@ -67,7 +67,7 @@ export default function RSVP() {
                                     setAttending(false);
                                     next();
                                 }}
-                                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition"
+                                className="mt-4 px-6 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition"
                             >
                                 {lang === "en" ? "No" : "ഇല്ല"}
                             </button>
@@ -77,26 +77,60 @@ export default function RSVP() {
 
                 {/* STEP 2 */}
                 {step === 2 && attending && (
-                    <>
-                        <h2 className="text-xl">
+                    <div className="flex flex-col gap-6">
+
+                        <h2 className="text-xl text-center">
                             {lang === "en"
-                                ? "How many people?"
-                                : "എത്ര പേർ വരും?"}
+                                ? "How many people, including you?"
+                                : "നിങ്ങളുൾപ്പെടെ എത്ര പേർ?"}
                         </h2>
 
-                        <input
-                            type="number"
-                            value={guests}
-                            min={1}
-                            onChange={(e) => setGuests(Number(e.target.value))}
-                            className="w-full p-2 rounded-lg text-black"
-                        />
+                        {/* GRID LAYOUT */}
+                        <div className="grid grid-cols-3 items-center gap-3 text-center">
 
-                        <div className="flex justify-between">
-                            <button onClick={back} className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition">Back</button>
-                            <button onClick={next} className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition">Continue</button>
+                            {/* Minus */}
+                            <button
+                                onClick={() => setGuests((prev) => Math.max(1, prev - 1))}
+                                className="w-12 h-12 mx-auto flex items-center justify-center rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md text-xl font-bold shadow-md hover:scale-105 transition"
+                            >
+                                -
+                            </button>
+
+                            {/* Number */}
+                            <div className="text-2xl font-bold">
+                                {guests}
+                            </div>
+
+                            {/* Plus */}
+                            <button
+                                onClick={() => setGuests((prev) => prev + 1)}
+                                className="w-12 h-12 mx-auto flex items-center justify-center rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md text-xl font-bold shadow-md hover:scale-105 transition"
+                            >
+                                +
+                            </button>
+
+                            {/* Back */}
+                            <button
+                                onClick={back}
+                                className="mt-4 px-6 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition"
+                            >
+                                Back
+                            </button>
+
+                            {/* Empty spacer */}
+                            <div></div>
+
+                            {/* Continue */}
+                            <button
+                                onClick={next}
+                                className="mt-4 px-12 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition flex justify-center itc "
+                            >
+                                Continue
+                            </button>
+
                         </div>
-                    </>
+
+                    </div>
                 )}
 
                 {/* STEP 3 */}
@@ -129,7 +163,7 @@ export default function RSVP() {
                         )}
 
                         <div className="flex justify-between">
-                            <button onClick={back} className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition">Back</button>
+                            <button onClick={back} className="mt-4 px-6 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition">Back</button>
                             <button
                                 onClick={async () => {
                                     // Reset error
@@ -183,7 +217,7 @@ export default function RSVP() {
                                         setError("Server error");
                                     }
                                 }}
-                                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition"
+                                className="mt-4 px-6 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition"
                             >
                                 Submit
                             </button>

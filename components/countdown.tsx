@@ -54,15 +54,32 @@ export default function Countdown() {
   const values = Object.values(time);
 
   return (
-    <div className="glass p-6 flex gap-4 text-center">
-      {values.map((d, i) => (
-        <div key={i}>
-          <p className="text-2xl font-bold">{d}</p>
-          <p className="text-xs uppercase opacity-70">
-            {labels[i]}
-          </p>
-        </div>
-      ))}
-    </div>
-  );
+  <div className="glass p-3 md:p-6 flex gap-2 md:gap-4 justify-center items-center w-[100vh]]">
+
+    {values.map((d, i) => (
+      <div
+        key={i}
+        className="
+          flex flex-col items-center justify-center
+          px-4 py-3 rounded-xl
+          bg-white/40 dark:bg-white/5
+          backdrop-blur-md
+          shadow-md
+          min-w-[70px]
+        "
+      >
+        {/* Number */}
+        <p className="text-2xl md:text-3xl font-bold gold">
+          {d}
+        </p>
+
+        {/* Label */}
+        <p className="text-xs uppercase opacity-70 tracking-wide mt-1">
+          {labels[i]}
+        </p>
+      </div>
+    ))}
+
+  </div>
+);
 }

@@ -25,33 +25,46 @@ export default function Home() {
       {/* TWO COLUMN LAYOUT */}
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <BackgroundAnimation />
         {/* BOX 1 — Names */}
-        <div className="bg-amber-700 p-10 flex-col items-end justify-between text-end">
-          <h1 className={`font-bold bg-red-500 ${lang === "ml"
-              ? "text-3xl leading-relaxed tracking-wide"
-              : "text-4xl"
-            }`}>
+        <div className="relative glass p-5 h-[50vh] md:h-auto md:p-10 flex flex-col md:items-end justify-start md:text-end gap-3 overflow-hidden">
+
+          <BackgroundAnimation />
+
+          <h1
+            className={`font-bold text-wrap gold ${lang === "ml"
+                ? "text-3xl leading-relaxed tracking-wide"
+                : "text-4xl"
+              }`}
+          >
             {t.title}
           </h1>
-          <div className="flex-col justify-end items-end">
-            <div className="flex justify-end">
-              <p>{
-                lang === 'en' ? "Bride's Parents" : "വധുവിന്റെ മാതാപിതാക്കള്‍"
-              }:&nbsp;</p>
-              <p>{t.brideP}</p>
+
+          <div className="flex flex-col justify-end items-start sm:items-end gap-3 ">
+            <div className="flex-col ">
+              <p >
+                {lang === "en"
+                  ? "Bride's Parents"
+                  : "വധുവിന്റെ മാതാപിതാക്കള്‍"}
+                :
+              </p>
+              <p className="font-bold">{t.brideP}</p>
             </div>
-            <div className="flex justify-end">
-              <p>{
-                lang === 'en' ? "Groom's Parents" : "വരന്റെ മാതാപിതാക്കള്‍"
-              }:&nbsp;</p>
-              <p>{t.groomP}</p>
+
+            <div className="flex-col justify-start ">
+              <p>
+                {lang === "en"
+                  ? "Groom's Parents"
+                  : "വരന്റെ മാതാപിതാക്കള്‍"}
+                :
+              </p>
+              <p className="font-bold">{t.groomP}</p>
             </div>
           </div>
+
         </div>
 
         {/* BOX 2 — Other Data */}
-        <div className="glass p-8 flex flex-col gap-4">
+        <div className="glass p-4 md:p-8 flex flex-col gap-4">
 
           {/* Event */}
           <p className="gold text-lg">
@@ -69,8 +82,8 @@ export default function Home() {
           <div className="mt-2">
             <p className="text-lg mb-2">
               {lang === "en"
-                ? "Countdown to Nikkah"
-                : "നിക്കാഹിലേക്ക് സമയം"}
+                ? "Countdown to Marriage"
+                : "വിവാഹതിലെക്കുള്ള സമയം"}
             </p>
 
             <Countdown />
@@ -78,15 +91,19 @@ export default function Home() {
 
           {/* RSVP Button */}
           <Link href="/rsvp">
-            <button className="mt-4 px-6 py-3 rounded-xl bg-gradient-to-r from-[#c9a646] to-[#e5c76b] text-black font-semibold shadow-md hover:scale-105 transition">
+            <button className="mt-4 px-6 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition">
               {lang === "en"
-                ? "RSVP Now"
-                : "ഇപ്പോൾ പ്രതികരിക്കുക"}
+                ? "For Customized Invitation Card, Click Here" 
+                : "കസ്ടമൈസ്ട് ക്ഷണകത്തിനായി, ഇവിടെ ക്ലിക്ക് ചെയ്യുക"}
             </button>
           </Link>
 
         </div>
 
+      </div>
+
+      <div>
+        Coded with ❤️ <Link href="https://www.instagram.com/ra_zi_ra_zz/">Razeena CP</Link>
       </div>
 
     </main>

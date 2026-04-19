@@ -5,25 +5,44 @@
   --foreground: #171717;
 }
 
-/* Base Theme */
+/* LIGHT MODE (Default) */
 body {
-  @apply bg-[#fdf6f0] text-black transition-all duration-300;
+  @apply bg-[#d1d0ce] text-[#1f2937] transition-all duration-300;
 }
 
-/* Dark Mode */
+/* DARK MODE */
 .dark body {
-  @apply bg-[#0b0f19] text-white;
+  @apply bg-[#090c13] text-[#e5e7eb];
 }
 
-/* Glassmorphism */
+/* Glass Effect */
 .glass {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.733);
+  backdrop-filter: blur(16px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgb(255, 255, 255);
 }
 
-/* Luxury Accent */
+/* Dark Glass */
+.dark .glass {
+  background: rgba(38, 41, 48, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Gold Accent */
 .gold {
-  color: #c9a646;
+  color: #e97b7be5;
+}
+
+/* Dark Gold (slightly softer) */
+.dark .gold {
+  color: rgba(243, 174, 174, 0.898);
+}
+
+.deep .dark {
+  color: #292727e5;
+}
+
+.deep {
+  color: #eee1e1;
 }
