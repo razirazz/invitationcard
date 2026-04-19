@@ -14,10 +14,13 @@ const malayalam = Noto_Sans_Malayalam({
   weight: ["400", "600", "700"],
 });
 
+
 export const metadata: Metadata = {
   title: "Razeena & Yousuf Ali",
   description: "Marriage Invitation",
 };
+
+import { Analytics } from "@vercel/analytics/next"
 
 export default function RootLayout({
   children,
@@ -30,6 +33,7 @@ export default function RootLayout({
       className={`${poppins.className} ${malayalam.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Analytics />
         <UIProvider >{children}</UIProvider></body>
     </html>
   );
