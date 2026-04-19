@@ -66,7 +66,7 @@ export default function Countdown({ onReady }: { onReady?: () => void }) {
   const values = Object.values(time);
 
   return (
-    <div className="glass p-3 md:p-6 flex gap-2 md:gap-4 justify-center items-center w-[100vh]]">
+    <div className="glass p-2 md:p-3 flex gap-1 md:gap-4 justify-center items-center w-[100vh]]">
 
       {values.map((d, i) => (
         <div
@@ -77,7 +77,7 @@ export default function Countdown({ onReady }: { onReady?: () => void }) {
           bg-white/40 dark:bg-white/5
           backdrop-blur-md
           shadow-md
-          min-w-[70px]
+          min-w-17.5
         "
         >
           {/* Number */}

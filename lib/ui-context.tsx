@@ -14,7 +14,7 @@ type UIContextType = {
 const UIContext = createContext<UIContextType | undefined>(undefined);
 
 export function UIProvider({ children }: { children: React.ReactNode }) {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(true);
   const [lang, setLang] = useState<LangType>("en");
 
   useEffect(() => {
