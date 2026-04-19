@@ -73,9 +73,9 @@ export default function Home() {
 
           {/* Details */}
           <div className="space-y-1">
-            <p>{t.date}</p>
+            <b><p className="text-[18px]">{t.date}</p>
             <p>{t.time}</p>
-            <p>{t.venue}</p>
+            <p>{t.venue}</p></b>
           </div>
 
           {/* Countdown */}

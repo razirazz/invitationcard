@@ -1,4 +1,17 @@
-export const content = {
+type LangType = "en" | "ml";
+
+export const content: Record<
+  LangType,
+  {
+    title: string;
+    brideP: string;
+    groomP: string;
+    event: string;
+    date: string;
+    time: string;
+    venue: string;
+  }
+> = {
   en: {
     title: "Razeena & Yousuf Ali",
     brideP: "Razzak & Mymoona",
@@ -10,9 +23,9 @@ export const content = {
   },
   ml: {
     title: "റസീന & യൂസുഫലി",
-    brideP: "റസാഖ്‌ & മൈമൂന",
-    groomP: "അബ്ദുല്‍ ലത്തീഫ് & സീനത്ത്",
-    event: "കല്ല്യാണം",
+    brideP: "റസാക്ക് & മൈമൂന",
+    groomP: "അബ്ദുൽ ലത്തീഫ് & സീനത്ത്",
+    event: "കല്യാണം",
     date: "2026 ജൂൺ 13",
     time: "11 മണി - 3 മണി",
     venue: "കൊട്ടലത്ത് ഗാർഡീനിയ, ചെട്ടിപ്പടി",

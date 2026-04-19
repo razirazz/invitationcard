@@ -2,28 +2,34 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-const UIContext = createContext<any>(null);
+type LangType = "en" | "ml";
+
+type UIContextType = {
+  dark: boolean;
+  setDark: (v: boolean) => void;
+  lang: LangType;
+  setLang: (v: LangType) => void;
+};
+
+const UIContext = createContext<UIContextType | undefined>(undefined);
 
 export function UIProvider({ children }: { children: React.ReactNode }) {
   const [dark, setDark] = useState(false);
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState<LangType>("en");
 
-  // Load from localStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    const savedLang = localStorage.getItem("lang");
+    const savedLang = localStorage.getItem("lang") as LangType | null;
 
     if (savedTheme === "dark") setDark(true);
     if (savedLang) setLang(savedLang);
   }, []);
 
-  // Apply theme
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
     localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
 
-  // Save language
   useEffect(() => {
     localStorage.setItem("lang", lang);
   }, [lang]);
@@ -35,4 +41,10 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const useUI = () => useContext(UIContext);
+export const useUI = () => {
+  const context = useContext(UIContext);
+  if (!context) {
+    throw new Error("useUI must be used within UIProvider");
+  }
+  return context;
+};

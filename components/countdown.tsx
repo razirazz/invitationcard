@@ -3,11 +3,18 @@
 import { useUI } from "@/lib/ui-context";
 import { useEffect, useState } from "react";
 
+type TimeType = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
 export default function Countdown() {
   const { lang } = useUI();
 
   const [mounted, setMounted] = useState(false);
-  const [time, setTime] = useState<any>(null);
+  const [time, setTime] = useState<TimeType | null>(null);
 
   const target = new Date("2026-06-13T11:00:00").getTime();
 
