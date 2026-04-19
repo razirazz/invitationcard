@@ -10,7 +10,7 @@ type TimeType = {
   seconds: number;
 };
 
-export default function Countdown() {
+export default function Countdown({ onReady }: { onReady?: () => void }) {
   const { lang } = useUI();
 
   const [mounted, setMounted] = useState(false);
@@ -33,7 +33,12 @@ export default function Countdown() {
   };
 
   useEffect(() => {
-    setMounted(true); // 👈 important
+    setMounted(true);
+
+    const initial = calculate();
+    setTime(initial);
+
+    if (onReady) onReady(); // 👈 IMPORTANT
 
     const interval = setInterval(() => {
       setTime(calculate());
@@ -61,12 +66,12 @@ export default function Countdown() {
   const values = Object.values(time);
 
   return (
-  <div className="glass p-3 md:p-6 flex gap-2 md:gap-4 justify-center items-center w-[100vh]]">
+    <div className="glass p-3 md:p-6 flex gap-2 md:gap-4 justify-center items-center w-[100vh]]">
 
-    {values.map((d, i) => (
-      <div
-        key={i}
-        className="
+      {values.map((d, i) => (
+        <div
+          key={i}
+          className="
           flex flex-col items-center justify-center
           px-4 py-3 rounded-xl
           bg-white/40 dark:bg-white/5
@@ -74,19 +79,19 @@ export default function Countdown() {
           shadow-md
           min-w-[70px]
         "
-      >
-        {/* Number */}
-        <p className="text-2xl md:text-3xl font-bold gold">
-          {d}
-        </p>
+        >
+          {/* Number */}
+          <p className="text-2xl md:text-3xl font-bold gold">
+            {d}
+          </p>
 
-        {/* Label */}
-        <p className="text-xs uppercase opacity-70 tracking-wide mt-1">
-          {labels[i]}
-        </p>
-      </div>
-    ))}
+          {/* Label */}
+          <p className="text-xs uppercase opacity-70 tracking-wide mt-1">
+            {labels[i]}
+          </p>
+        </div>
+      ))}
 
-  </div>
-);
+    </div>
+  );
 }

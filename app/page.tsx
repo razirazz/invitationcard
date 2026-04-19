@@ -3,14 +3,28 @@
 import BackgroundAnimation from "@/components/bg/bg2";
 import Countdown from "@/components/countdown";
 import LangToggle from "@/components/lang-toggle";
+import Loader from "@/components/loader";
 import ThemeToggle from "@/components/theme-toggle";
 import { content } from "@/lib/content";
 import { useUI } from "@/lib/ui-context";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { lang } = useUI();
   const t = content[lang];
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500); // adjust timing
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loader />;
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-8 p-6">
