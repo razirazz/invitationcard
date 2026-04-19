@@ -83,7 +83,7 @@ export default function Home() {
             <p className="text-lg mb-2">
               {lang === "en"
                 ? "Countdown to Marriage"
-                : "വിവാഹതിലെക്കുള്ള സമയം"}
+                : "വിവാഹത്തിലെക്കുള്ള സമയം"}
             </p>
 
             <Countdown />
