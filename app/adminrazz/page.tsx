@@ -55,7 +55,7 @@ export default function Admin() {
                         <tr className="border-b">
                             <th>Name</th>
                             <th>Phone</th>
-                            <th>Attending</th>
+                            {/* <th>Attending</th> */}
                             <th>Guests</th>
                             <th>Date</th>
                         </tr>
@@ -66,9 +66,9 @@ export default function Admin() {
                             <tr key={i} className="border-b">
                                 <td>{item.name}</td>
                                 <td>{item.phone}</td>
-                                <td>
+                                {/* <td>
                                     {item.attending ? "Yes" : "No"}
-                                </td>
+                                </td> */}
                                 <td>{item.guests}</td>
                                 <td>
                                     {new Date(item.created_at).toLocaleString()}
