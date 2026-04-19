@@ -16,7 +16,7 @@ const malayalam = Noto_Sans_Malayalam({
 
 export const metadata: Metadata = {
   title: "Razeena & Yousuf",
-  description: "Nikkah Invitation",
+  description: "Marriage Invitation",
 };
 
 export default function RootLayout({
