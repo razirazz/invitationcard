@@ -103,7 +103,7 @@ export default function Home() {
       </div>
 
       <div>
-        Coded with ❤️ <Link href="https://www.instagram.com/ra_zi_ra_zz/">Razeena CP</Link>
+        Coded with ❤️ <Link href="https://www.instagram.com/ra_zi_ra_zz/" className="underline underline-offset-4">Razeena CP</Link>
       </div>
 
     </main>
