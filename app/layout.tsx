@@ -15,7 +15,7 @@ const malayalam = Noto_Sans_Malayalam({
 });
 
 export const metadata: Metadata = {
-  title: "Razeena & Yousuf",
+  title: "Razeena & Yousuf Ali",
   description: "Marriage Invitation",
 };
 
