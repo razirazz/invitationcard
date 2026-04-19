@@ -21,19 +21,23 @@ export default function Home() {
         <ThemeToggle />
       </div>
 
-      <p
-        className={`
-          text-sm md:text-base 
+      <div className="flex-col">
+        <p className="text-sm md:text-base 
           tracking-wide 
           italic  
-          text-center
-          
-        `}
-      >
-        {lang === "en"
-          ? "In the name of Allah, the Most Gracious, the Most Merciful"
-          : "അല്ലാഹുവിന്റെ നാമത്തിൽ, ഏറ്റവും കരുണാനിധിയും അത്യന്തം ദയാവാനുമായ"}
-      </p>
+          text-center">السلام  عليكم  ورحمت الله وبركاته</p>
+        <p
+          className="text-sm md:text-base 
+          tracking-wide 
+          italic  
+          text-center"
+        >
+          {lang === "en"
+            ? "In the name of Allah, the Most Gracious, the Most Merciful"
+            : "അല്ലാഹുവിന്റെ നാമത്തിൽ, ഏറ്റവും കരുണാനിധിയും അത്യന്തം ദയാവാനുമായ"}
+        </p>
+      </div>
+
 
 
       {/* TWO COLUMN LAYOUT */}
@@ -87,14 +91,14 @@ export default function Home() {
 
           {/* Details */}
           <div className="space-y-1">
-            <b><p className="text-[18px]">{t.date}</p>
+            <b><p>{t.date}</p>
               <p>{t.time}</p>
               <p>{t.venue}</p></b>
           </div>
 
           {/* Countdown */}
-          <div className="mt-2">
-            <p className="text-lg mb-2">
+          <div className="mt-1 ">
+            <p className=" mb-2">
               {lang === "en"
                 ? "Countdown to Marriage"
                 : "വിവാഹത്തിലെക്കുള്ള സമയം"}
@@ -103,9 +107,18 @@ export default function Home() {
             <Countdown />
           </div>
 
+          <p
+            className="text-center mt-1 px-6 py-3 rounded-xl font-semibold shadow-md" >
+            &#9825;&nbsp;&nbsp;&nbsp;&nbsp;
+            {lang === "en"
+              ? "In-sha-Allah"
+              : "ഇൻഷാ അല്ലാഹ്"}
+            &nbsp;&nbsp;&nbsp;&#9825;
+          </p>
+
           {/* RSVP Button */}
           <Link href="/rsvp">
-            <button className="mt-4 px-6 py-3 rounded-xl glass gold font-semibold shadow-md hover:scale-105 transition">
+            <button className="text-sm md:text-base text-center mt-1 underline underline-offset-4">
               {lang === "en"
                 ? "For Customized Invitation Card, Click Here"
                 : "കസ്ടമൈസ്ട് ക്ഷണകത്തിനായി, ഇവിടെ ക്ലിക്ക് ചെയ്യുക"}
@@ -115,6 +128,8 @@ export default function Home() {
         </div>
 
       </div>
+
+
 
       <div>
         Coded with ❤️ <Link href="https://www.instagram.com/ra_zi_ra_zz/" className="underline underline-offset-4">Razeena CP</Link>
