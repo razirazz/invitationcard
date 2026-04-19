@@ -15,7 +15,7 @@ export default function Admin() {
         const { data, error } = await supabase
             .from("rsvp")
             .select("*")
-            .order("created_at", { ascending: false });
+            .order("created_at", { ascending: false, nullsFirst: false});
 
         if (!error) {
             setData(data);
