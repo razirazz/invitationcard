@@ -23,7 +23,7 @@ export default function RSVP() {
     const back = () => setStep((s) => s - 1);
 
     useEffect(() => {
-        if ((attending === false && step === 2) || (attending && step === 4)) {
+        if (attending && step === 4) {
             const timer = setTimeout(() => {
                 router.push("/");
             }, 2500); // 10 seconds
@@ -33,7 +33,7 @@ export default function RSVP() {
     }, [attending, step, router]);
 
     return (
-        <main className="min-h-screen flex items-center justify-center p-6">
+        <main className="min-h-[90vh] flex items-center justify-center p-6">
 
             <motion.div
                 key={step}
@@ -201,7 +201,9 @@ export default function RSVP() {
                                         const data = await res.json();
 
                                         if (data.success) {
-                                            next();
+                                            router.push(
+                                                `/card?name=${encodeURIComponent(name)}&phone=${phone}`
+                                            );
                                         } else {
                                             if (data.error === "Phone already exists") {
                                                 setError(
@@ -226,24 +228,72 @@ export default function RSVP() {
                 )}
 
                 {/* STEP 4 */}
-                {(step === 4 || (!attending && step === 2)) && (
-                    <>
-                        <h2 className="text-xl font-semibold">
-                            {attending
-                                ? lang === "en"
-                                    ? "Thank you! 🎉"
-                                    : "നന്ദി! 🎉"
-                                : lang === "en"
-                                    ? "You will be redirected to home shortly..."
-                                    : "താങ്കൾ ഉടൻ ഹോം പേജിലേക്ക് മടങ്ങും..."}
-                        </h2>
+                {step === 2 && attending === false && (
+                    <div className="min-h-[65vh] flex flex-col justify-between text-center">
 
-                        <p>
+                        {/* Back */}
+                        <div className="text-left">
+                            <button
+                                onClick={back}
+                                className="text-sm opacity-60 hover:opacity-100 transition"
+                            >
+                                ← {lang === "en" ? "Back" : "തിരികെ"}
+                            </button>
+                        </div>
+
+                        {/* Main Content */}
+                        <div className="flex flex-col items-center justify-center gap-6 px-4">
+
+                            {/* Soft Icon */}
+                            <div className="text-3xl opacity-80">🌙</div>
+
+                            {/* Heading */}
+                            <h2 className="text-xl md:text-2xl font-medium tracking-wide leading-snug">
+                                {lang === "en"
+                                    ? "Even if you’re not with us..."
+                                    : "നിങ്ങൾ ഞങ്ങളോടൊപ്പം ഇല്ലെങ്കിലും..."}
+                            </h2>
+
+                            {/* Message */}
+                            <p className="text-sm md:text-base opacity-80 leading-relaxed max-w-xs md:max-w-sm">
+                                {lang === "en"
+                                    ? "Your thoughts and prayers mean a lot to us. Thank you for letting us know — may Allah bless your days with peace and ease."
+                                    : "നിങ്ങളുടെ പ്രാർത്ഥനകളും ആശംസകളും ഞങ്ങൾക്ക് ഏറെ വിലപ്പെട്ടതാണ്. അറിയിച്ചതിന് നന്ദി — അല്ലാഹു നിങ്ങളെ സമാധാനത്തിലും അനുഗ്രഹത്തിലും നിറക്കട്ടെ."}
+                            </p>
+
+                        </div>
+
+                        {/* Event Card */}
+                        <div className="glass p-5 space-y-1 text-sm md:text-base border border-[#c9a646]/20 shadow-[0_0_20px_rgba(201,166,70,0.08)] mt-3">
+                            <p className="font-semibold gold">13 June 2026</p>
+                            <p>11:00 AM - 3:00 PM</p>
+                            <p className="opacity-80">Kottalath Gardenia, Chettippadi</p>
+                        </div>
+
+                        {/* CTA */}
+                        <button
+                            onClick={() => router.push("/")}
+                            className="
+                                mt-4
+                                px-6 py-3
+                                rounded-xl
+                                bg-gradient-to-r from-[#c9a646]/20 to-[#f1d77a]/20
+                                border border-[#c9a646]/30
+                                backdrop-blur-md
+                                text-sm md:text-base
+                                gold
+                                font-medium
+                                hover:scale-[1.02]
+                                hover:bg-[#c9a646]/30
+                                transition
+                            "
+                        >
                             {lang === "en"
-                                ? "Thank you for your response"
-                                : "നിങ്ങളുടെ മറുപടിക്ക് നന്ദി"}
-                        </p>
-                    </>
+                                ? "Change of plans? Join us anytime 🤍"
+                                : "മനസ്സുമാറ്റമുണ്ടെങ്കിൽ — സ്വാഗതം 🤍"}
+                        </button>
+
+                    </div>
                 )}
 
             </motion.div>

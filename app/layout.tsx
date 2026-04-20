@@ -21,6 +21,9 @@ export const metadata: Metadata = {
 };
 
 import { Analytics } from "@vercel/analytics/next"
+import LangToggle from "@/components/lang-toggle";
+import ThemeToggle from "@/components/theme-toggle";
+import FallingParticles from "@/components/bg/falling";
 
 export default function RootLayout({
   children,
@@ -32,9 +35,30 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.className} ${malayalam.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col pt-16 md:pt-0">
         <Analytics />
-        <UIProvider >{children}</UIProvider></body>
+        <UIProvider >
+
+          <div className="fixed top-3 right-3 md:top-4 md:right-4 z-50 pb-20">
+            <div className="
+              flex gap-2
+              bg-white/10 dark:bg-white/5
+              backdrop-blur-md
+              border border-white/10
+              px-3 py-2
+              rounded-full
+              shadow-lg"
+            >
+              <LangToggle />
+              <ThemeToggle />
+            </div>
+          </div>
+          <FallingParticles />
+          <div>
+            {children}
+          </div>
+
+        </UIProvider></body>
     </html>
   );
 }

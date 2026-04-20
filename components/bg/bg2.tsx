@@ -10,7 +10,6 @@ export default function BackgroundAnimation() {
         absolute 
         bottom-0 
         right-0 
-        md:left-0 md:right-auto
         pointer-events-none
         opacity-80
       "
