@@ -25,16 +25,16 @@ export default function LuxuryBackground() {
 
   useEffect(() => {
     // ✨ GOLD PARTICLES (many, subtle)
-    const p = Array.from({ length: 25 }).map((_, i) => ({
+    const p = Array.from({ length: 50 }).map((_, i) => ({
       id: i,
       left: Math.random() * 100,
-      size: 2 + Math.random() * 4,
+      size: 5 + Math.random() * 4,
       duration: 10 + Math.random() * 10,
       delay: Math.random() * 10,
     }));
 
     // 🌸 PETALS (few, rare)
-    const petalsData = Array.from({ length: 6 }).map((_, i) => ({
+    const petalsData = Array.from({ length: 20 }).map((_, i) => ({
       id: i,
       left: Math.random() * 100,
       size: 16 + Math.random() * 14,

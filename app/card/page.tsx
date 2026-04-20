@@ -134,7 +134,7 @@ END:VCALENDAR`;
             >
 
                 {/* Top Divider */}
-                <div className="h-[2px] w-24 mx-auto bg-gradient-to-r from-transparent via-[#c9a646] to-transparent" />
+                <div className="h-0.5 w-24 mx-auto bg-gradient-to-r from-transparent via-[#c9a646] to-transparent" />
 
                 {/* Bismillah */}
                 <p className="text-xs md:text-sm opacity-70 tracking-wide">
@@ -161,7 +161,7 @@ END:VCALENDAR`;
                 </p>
 
                 {/* Divider */}
-                <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[rgba(201,166,70,0.4)] to-transparent" />
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-[rgba(201,166,70,0.4)] to-transparent" />
 
                 {/* Event Details */}
                 <div className="space-y-1 text-sm md:text-base">
